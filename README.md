@@ -9,5 +9,11 @@ or in the air. International cooperation of air traffic control providers has he
 one of the most rapid and dependable mode of travel. Flight operations staff work around the clock to
 ensure the smooth running of these services. In this project, you will explore these flight operations services’
 event-driven flight scheduling and processing routines.
+ 
+the operations are like below. 
+
+Note that the main thing we are handling here is quite same as cpu scheduling.
 
 ![image](https://user-images.githubusercontent.com/108425372/215768150-328d37fe-f244-4d6b-bd65-ffe23998035b.png)
+
+![image](https://user-images.githubusercontent.com/108425372/215768357-348a4b8e-6b1e-4c0d-beaa-7ba87276f657.png)
