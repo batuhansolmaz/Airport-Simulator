@@ -29,7 +29,7 @@ public class ACC {
         if (flight.operation_number>11){
             flight.arrival.runningqueueAtc.remove(flight);
             if (flight.arrival.runningqueueAtc.peek()!=null){
-                return flight.arrival.runningqueueAtc.peek(); //removeluyoz burda sonra ekliyoruz ama
+                return flight.arrival.runningqueueAtc.peek();
             }
 
         }
@@ -95,7 +95,7 @@ public class ACC {
             flight.update_operations(flight.execution_time);
             current_time += flight.execution_time;
             flight.New=false;
-            runningqueue.remove(flight);// burda sıkıntı var
+            runningqueue.remove(flight);
         }
         else{
             if (flight.left_time() > flight.execution_time){
@@ -188,7 +188,6 @@ public class ACC {
 
 
     public Flight Update_Running_Queue(int time){
-        //We update both running queues
         if (runningqueue.size() != 0) {
             runningqueue.peek().update_operations(time);
             runningqueue.peek().execution_time -= time;
@@ -203,7 +202,7 @@ public class ACC {
         return null;
     }
 
-    public void Update_Running_QueueAtc(int time){ //We update both running queues
+    public void Update_Running_QueueAtc(int time){
         if (runningqueueAtc.size() != 0) {
             Flight next_atc_running=null;
             Object [] array = runningqueueAtc.toArray();
@@ -230,7 +229,6 @@ public class ACC {
 
         }
     }
-    // her hamlede waitingler güncellencek
 
     public int simulate() {
         long bar = 300000000;
@@ -248,7 +246,7 @@ public class ACC {
                         Flight flight = waitingqueue.peek();
                         int passing_time = flight.execution_time;
                         time_handler_for_waiting(waitingqueue.peek());
-                        Update_Waiting_Queue(passing_time); // should update waiting queue but this should also affect the running queues adden sonra update etmemeli. Burda waitinig update ettikten sonra runninge eleman ekliyoruz
+                        Update_Waiting_Queue(passing_time); 
                         flight1 = Update_Running_Queue(passing_time);
                         Update_Running_QueueAtc(passing_time);
                         for (Flight x : next) {
@@ -259,20 +257,18 @@ public class ACC {
                         }
                         next_atc.clear();
                         next.clear();
-                        //operation numberı güncelledikten sonra eklemeye çalışıyoz
                         add(flight);
                         add(flight1);
                         continue;
-                        // if min is not in running queue we still have time slice of 30sn
                     }
                 }
                 if (runningqueue.size() != 0) {
                     if (runningqueue.peek().execution_time == find_min()) {
                         Flight flight = runningqueue.peek();
-                        int passing_time = flight.execution_time; //burası normal execution time olcak galiba
+                        int passing_time = flight.execution_time; 
 
                         time_handler(runningqueue.peek());
-                        Update_Waiting_Queue(passing_time); // should update waiting queue but this should also affect the running queues adden sonra update etmemeliyiz
+                        Update_Waiting_Queue(passing_time); 
                         Update_Running_QueueAtc(passing_time);
                         for (Flight x : next) {
                             add(x);
@@ -285,7 +281,6 @@ public class ACC {
                         add(flight);
 
                         continue;
-                        // if min is not in running queue we still have time slice of 30sn
                     }
                 }
                 if (runningqueueAtc.size() != 0) {
@@ -293,7 +288,7 @@ public class ACC {
                         Flight flight = runningqueueAtc.peek();
                         int passing_time = flight.execution_time;
                         time_handler_for_act(runningqueueAtc.peek());
-                        Update_Waiting_Queue(passing_time); // should update waiting queue but this should also affect the running queues adden sonra update etmemeliyiz
+                        Update_Waiting_Queue(passing_time); 
                         flight1 = Update_Running_Queue(passing_time);
                         for (Flight i : next_atc) {
                             add(i);
@@ -308,7 +303,6 @@ public class ACC {
 
                         add(flight1);
                         continue;
-                        // if min is not in running queue we still have time slice of 30sn
                     }
                 }
 
